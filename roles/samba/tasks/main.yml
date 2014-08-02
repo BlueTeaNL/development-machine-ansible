@@ -1,0 +1,8 @@
+- name: Ensure Samba-related packages are installed.
+  apt: pkg=samba state=installed
+
+- name: Copy in Samba configuration.
+  copy: src=smb.conf dest=/etc/samba/smb.conf owner=root group=root mode=0644
+
+- name: Make sure SAMBA service is started
+  service: name=smbd state=started

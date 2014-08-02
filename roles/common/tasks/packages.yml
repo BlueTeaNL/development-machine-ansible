@@ -1,0 +1,9 @@
+---
+- name: ensure apt cache is up to date
+  apt: update_cache=yes
+  sudo: yes
+
+- name: install {{ item }} pkgs
+  apt: pkg={{ item }} state=latest
+  with_items: packages
+  sudo: yes

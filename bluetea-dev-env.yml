@@ -1,0 +1,61 @@
+---
+- hosts: development
+  remote_user: root
+  
+  vars:
+    mysql_root_password: bluetea
+    packages:
+      - git
+      - htop
+      - atop
+      - python-mysqldb
+      - apache2
+      - mysql-server
+      - libcap-dev
+      - git
+      - libicu-dev
+      - libssl-dev
+      - php5
+      - php5-mysql
+      - php5-cli
+      - php-pear
+      - php5-dev
+      - php5-intl
+      - php5-xmlrpc
+      - php-apc
+      - zip
+      - unzip
+      - mongodb-org
+      - supervisor
+      - rabbitmq-server
+    usergroups:
+      - admins
+      - developers
+      - users
+    users:
+      - { name: pim, home: /home/pim, group: 'admins,developers,users' , key: "{{ lookup('file', 'sshkeys/pim.pub') }}" }
+      - { name: bert, home: /home/bert, group: 'admins,developers,users' , key: "{{ lookup('file', 'sshkeys/bert.pub') }}" }
+
+  pre_tasks:
+    - name: PRE TASK | Add python-apt package
+      apt: pkg=python-apt state=present
+
+    - name: PRE TASK | Add RabbitMQ APT repository key
+      apt_key: url=http://www.rabbitmq.com/rabbitmq-signing-key-public.asc state=present
+
+    - name: PRE TASK | Add RabbitMQ APT repository
+      apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main' state=present
+
+    - name: PRE TASK | Add MongoDB APT repository key
+      apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=7F0CEB10 state=present
+
+    - name: PRE TASK | Add MongoDB APT repository
+      apt_repository: repo='deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' state=present
+
+  roles:
+    - common
+    - bluetea-environment
+    - npm
+    - pecl
+    - samba
+    - phpmyadmin

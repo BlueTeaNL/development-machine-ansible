@@ -1,0 +1,3 @@
+---
+- name: restart samaba
+  service: name=smbd state=restarted

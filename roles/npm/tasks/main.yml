@@ -1,0 +1,10 @@
+---
+- name: NPM | Install NodeJS and NPM
+  apt: pkg={{ item }} state=present
+  with_items:
+    - nodejs
+    - npm
+
+- name: NPM | Install NPM packages
+  npm: name={{ item.package }} global={{ item.global }} state=present
+  with_items: npm_packages

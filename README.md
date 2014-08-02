@@ -17,7 +17,7 @@ ssh-add ~/.ssh/id_rsa
 
 ## General
 
-Before executing playbooks you should have ansible installed. The ansible control machine has to be a Linux machine (Ubuntu / CentOS / ...). In Ubuntu run `apt-get install ansible` to install Ansible.
+Before executing playbooks you should have ansible installed. The ansible control machine has to be a Linux machine (Ubuntu / CentOS / ...). In Ubuntu run `apt-get install ansible` to install Ansible. Make sure you have installed the Ansible PPA otherwise you get an ancient version! Run `apt-add-repository ppa:ansible/ansible` and `apt-get update` before installing ansible.
 
 After the installation process has finished configure the hosts. The general configuration files are located in the `/etc/ansible` directory. The `hosts` file contains all hosts. This repository conatins an example hosts file you can use.
 

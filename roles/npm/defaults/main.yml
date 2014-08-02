@@ -1,0 +1,5 @@
+---
+npm_packages:
+  - { package: less, global: yes }
+  - { package: uglifycss, global: yes }
+  - { package: uglify-js, global: yes }
