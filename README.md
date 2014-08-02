@@ -1,6 +1,8 @@
 BlueTea Ansible IT Automation
 ============================
 
+Want to deploy a new development environment? Read [Clean install](CLEAN_INSTALL.md) for the how-to!
+
 This repository contains Ansible configurations for automating server installations and application deployments.
 
 This repository is still a work in progress so it isn't finished yet!
