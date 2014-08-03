@@ -1,4 +1,0 @@
----
-- include: services.yml
-- include: apache2.yml
-- include: mysql.yml

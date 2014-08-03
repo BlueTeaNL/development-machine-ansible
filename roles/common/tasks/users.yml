@@ -1,12 +1,12 @@
 ---
-- name: create groups
+- name: Group | Create
   group: name={{ item }} system=yes state=present
   with_items: usergroups
 
-- name: create users
+- name: User | Create
   user: name={{ item.name }} home={{ item.home }} groups={{ item.group }} state=present
   with_items: users
 
-- name: add ssh keys to the created users
+- name: Authorized Key | Add ssh keys to the created users
   authorized_key: user={{ item.name }} key="{{ item.key }}"
   with_items: users

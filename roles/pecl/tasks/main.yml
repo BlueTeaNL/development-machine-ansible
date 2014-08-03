@@ -1,10 +1,10 @@
 ---
-- name: PECL | Ensure PHP development packages are installed
+- name: APT | Ensure PHP development packages are installed
   apt: pkg={{ item }} state=installed
   with_items:
     - php5-dev
     - php-pear
     - make
 
-- name: PECL | Install PECL packages
+- name: Include pecl.yml | Install PECL packages
   include: pecl.yml package=mongo version=stable

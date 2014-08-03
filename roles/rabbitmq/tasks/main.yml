@@ -1,0 +1,18 @@
+---
+- name: APT repository | Add RabbitMQ key
+  apt_key: url=http://www.rabbitmq.com/rabbitmq-signing-key-public.asc state=present
+  register: rabbitmq_key
+
+- name: APT repository | Add RabbitMQ repository
+  apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main' state=present
+  register: rabbitmq_repository
+
+- name: APT | Update cache
+  apt: update_cache=yes
+  when: rabbitmq_key|changed or rabbitmq_repository|changed
+
+- name: APT | Install rabbitmq-server
+  apt: pkg=rabbitmq-server state=present
+
+- name: Service | Start rabbitmq-server
+  service: name=rabbitmq-server state=started

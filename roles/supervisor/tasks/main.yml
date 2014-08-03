@@ -1,0 +1,6 @@
+---
+- name: APT | Install supervisor
+  apt: pkg=supervisor state=present
+
+- name: Service | Start supervisor
+  service: name=supervisor state=started

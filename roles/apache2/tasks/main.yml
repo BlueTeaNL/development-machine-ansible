@@ -1,0 +1,21 @@
+---
+- name: APT | Install Apache
+  apt: pkg=apache2 state=present
+
+- name: APT | Install PHP5
+  apt: pkg={{ item }} state=present
+  with_items:
+    - php5
+    - php5-mysql
+    - php5-cli
+    - php-pear
+    - php5-dev
+    - php5-intl
+    - php5-xmlrpc
+    - php-apc
+
+- name: Apache2 module | Enable rewrite
+  apache2_module: name=rewrite state=present
+
+- name: Service | Start apache2
+  service: name=apache2 state=started

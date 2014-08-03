@@ -1,3 +1,0 @@
----
-- name: Enable rewrite
-  apache2_module: name=rewrite state=present
