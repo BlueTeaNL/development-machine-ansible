@@ -10,7 +10,6 @@
       - atop
       - python-mysqldb
       - apache2
-      - mysql-server
       - libcap-dev
       - git
       - libicu-dev
