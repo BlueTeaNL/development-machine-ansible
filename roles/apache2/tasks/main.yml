@@ -1,4 +1,7 @@
 ---
+- name: Include variables
+  include_vars: vars/apache2.yml
+
 - name: APT | Install Apache
   apt: pkg=apache2 state=present
 
@@ -9,9 +12,11 @@
 - name: Apache2 module | Enable rewrite
   apache2_module: name={{ item }} state=present
   with_items: apache2_modules
+  notify: restart apache2
 
 - name: Template | Configure virtual hosts
   template: src=vhost.conf.j2 dest=/etc/apache2/sites-enabled/vhosts
+  notify: restart apache2
 
 - name: Service | Start apache2
   service: name=apache2 state=started
