@@ -4,18 +4,14 @@
 
 - name: APT | Install PHP5
   apt: pkg={{ item }} state=present
-  with_items:
-    - php5
-    - php5-mysql
-    - php5-cli
-    - php-pear
-    - php5-dev
-    - php5-intl
-    - php5-xmlrpc
-    - php-apc
+  with_items: apache2_packages
 
 - name: Apache2 module | Enable rewrite
-  apache2_module: name=rewrite state=present
+  apache2_module: name={{ item }} state=present
+  with_items: apache2_modules
+
+- name: Template | Configure virtual hosts
+  template: src=vhost.conf.j2 dest=/etc/apache2/sites-enabled/vhosts
 
 - name: Service | Start apache2
   service: name=apache2 state=started

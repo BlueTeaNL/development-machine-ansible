@@ -1,0 +1,17 @@
+{% for vhost in apache2_vhosts %}
+<VirtualHost {{ vhost.interfaces|default('*') }}:{{ vhost.port|default('80') }}>
+    ServerName {{ vhost.servername }}
+    Alias www.{{ vhost.servername }}
+
+    DocumentRoot {{ vhost.documentroot }}
+    <Directory {{ vhost.documentroot }}>
+        Options -Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    </Directory>
+
+    CustomLog ${APACHE_LOG_DIR}/access_{{ vhost.servername }}.log combined
+    ErrorLog ${APACHE_LOG_DIR}/error_{{ vhost.servername }}.log
+</VirtualHost>
+{% endfor %}

@@ -1,0 +1,19 @@
+---
+apache2_packages:
+  - php5
+  - php5-mysql
+  - php5-cli
+  - php-pear
+  - php5-dev
+  - php5-intl
+  - php5-xmlrpc
+  - php-apc
+
+apache2_modules:
+  - rewrite
+
+apache2_vhosts:
+  - { port: 80,
+      servername: example.local,
+      documentroot: /var/www/html,
+      serveradmin: p.widdershoven@bluetea.nl }
