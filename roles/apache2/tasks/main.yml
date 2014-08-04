@@ -15,7 +15,7 @@
   notify: restart apache2
 
 - name: Template | Configure virtual hosts
-  template: src=vhost.conf.j2 dest=/etc/apache2/sites-enabled/vhosts
+  template: src=vhost.conf.j2 dest=/etc/apache2/sites-enabled/sites.conf
   notify: restart apache2
 
 - name: Service | Start apache2

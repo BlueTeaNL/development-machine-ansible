@@ -1,8 +1,8 @@
 ---
 apache2_vhosts:
   - { port: 80,
-      servername: example.local,
-      documentroot: /var/www/html,
+      servername: hotflo2.local,
+      documentroot: /var/www/hotflo20/web,
       serveradmin: p.widdershoven@bluetea.nl }
   - { port: 80,
       servername: example2.local,
