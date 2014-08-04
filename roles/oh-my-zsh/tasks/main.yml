@@ -1,0 +1,31 @@
+---
+- name: APT | Install git and zsh 
+  apt: pkg={{ item }} state=latest
+  with_items:
+   - git
+   - zsh
+   - git-core
+
+- name: GIT | Clone oh-my-zsh repo
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest={{ item.home }}/.oh-my-zsh
+  with_items: users
+
+- name: File | remove standard zshrc
+  file: path={{ item.home }}/.zshrc state=absent
+  with_items: users
+
+- name: File | Create conf folder in home directory
+  file: path={{ item.home }}/conf state=directory owner={{ item.name }}
+  with_items: users
+
+- name: Template | deploy .zshrc
+  template: src=zshrc.in dest={{ item.home }}/conf/zshrc owner={{ item.name }}
+  with_items: users
+
+- name: File | symlink zshrc
+  file: path={{ item.home }}/.zshrc src={{ item.home }}/conf/zshrc state=link owner={{ item.name }}
+  with_items: users
+
+- name: User | Set zsh as default shell
+  user: name={{ item.name }} shell=/bin/zsh
+  with_items: users

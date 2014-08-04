@@ -7,6 +7,15 @@
 - name: APT | mysql-server
   apt: pkg=mysql-server state=present
 
+- name: File | Create MySQL configuration directory
+  file: path=/etc/mysql owner=root group=root mode=0644 state=directory
+
+- name: File | Create MySQL data directory
+  file: path=/var/lib/mysql owner=mysql group=mysql mode=0644 state=directory
+
+- name: Copy | Copy my.conf
+  copy: src=my.cnf dest=/etc/mysql/my.cnf owner=root group=root mode=0644
+
 - name: Service | Start mysql-server
   action: service name=mysql state=started
 

@@ -15,11 +15,13 @@
       - libssl-dev
       - zip
       - unzip
+      - acl
     usergroups:
       - admins
       - developers
       - users
     users:
+      - { name: administrator, home: /home/administrator, group: 'admins,developers,users', key: "{{ lookup('file', 'sshkeys/bluetea.pub') }}" }
       - { name: pim, home: /home/pim, group: 'admins,developers,users' , key: "{{ lookup('file', 'sshkeys/pim.pub') }}" }
       - { name: bert, home: /home/bert, group: 'admins,developers,users' , key: "{{ lookup('file', 'sshkeys/bert.pub') }}" }
 
@@ -38,3 +40,4 @@
     - pecl
     - samba
     - phpmyadmin
+    - oh-my-zsh
