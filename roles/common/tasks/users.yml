@@ -4,7 +4,7 @@
   with_items: usergroups
 
 - name: User | Create
-  user: name={{ item.name }} home={{ item.home }} groups={{ item.group }} state=present
+  user: name={{ item.name }} home={{ item.home }} group={{ item.group }} groups={{ item.secundary_groups }} state=present
   with_items: users
 
 - name: Authorized Key | Add ssh keys to the created users

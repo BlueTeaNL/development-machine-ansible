@@ -21,9 +21,9 @@
       - developers
       - users
     users:
-      - { name: administrator, home: /home/administrator, group: 'admins,developers,users', key: "{{ lookup('file', 'sshkeys/bluetea.pub') }}" }
-      - { name: pim, home: /home/pim, group: 'admins,developers,users' , key: "{{ lookup('file', 'sshkeys/pim.pub') }}" }
-      - { name: bert, home: /home/bert, group: 'admins,developers,users' , key: "{{ lookup('file', 'sshkeys/bert.pub') }}" }
+      - { name: administrator, home: /home/administrator, group: 'admins', secundary_groups: 'developers,users', key: "{{ lookup('file', 'sshkeys/bluetea.pub') }}" }
+      - { name: pim, home: /home/pim, group: 'admins', secundary_groups: 'developers,users' , key: "{{ lookup('file', 'sshkeys/pim.pub') }}" }
+      - { name: bert, home: /home/bert, group: 'admins', secundary_groups: 'developers,users' , key: "{{ lookup('file', 'sshkeys/bert.pub') }}" }
 
   pre_tasks:
     - name: PRE TASK | Add python-apt package
