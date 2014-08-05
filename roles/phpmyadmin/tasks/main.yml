@@ -1,4 +1,16 @@
 ---
+- name: APT key | Add PhpMyAdmin key
+  apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=06ED541C state=present
+  register: phpmyadmin_key
+
+- name: APT repository | Add PhpMyAdmin repository
+  apt_repository: repo='deb http://ppa.launchpad.net/nijel/phpmyadmin/ubuntu trusty main' state=present
+  register: phpmyadmin_repository
+
+- name: APT | Update cache
+  apt: update_cache=yes
+  when: phpmyadmin_key|changed or phpmyadmin_repository|changed
+
 - name: Debconf | dbconfig-install
   debconf: name=phpmyadmin question='phpmyadmin/dbconfig-install' value='true' vtype='boolean'
 
@@ -15,7 +27,15 @@
   debconf: name=phpmyadmin question='phpmyadmin/reconfigure-webserver' value='' vtype='multiselect'
 
 - name: APT | Install phpmyadmin
-  apt: pkg=phpmyadmin state=present
+  apt: pkg=phpmyadmin state=latest
 
 - name: File | Symlink phpmyadmin directory to www directory
   file: path=/var/www/html/phpmyadmin src=/usr/share/phpmyadmin state=link
+
+- name: Stat | Check if /etc/phpmyadmin/config-db.php exists
+  stat: path=/etc/phpmyadmin/config-db.php
+  register: phpmyadmin_config
+
+- name: Command | Rename config-db.php to config-db.php.disabled
+  command: mv /etc/phpmyadmin/config-db.php /etc/phpmyadmin/config-db.php.disabled
+  when: phpmyadmin_config.stat.exists == True
