@@ -5,6 +5,9 @@
     - nodejs
     - npm
 
+- name: File | Create symbolic link to avoid errors
+  file: src=/usr/bin/nodejs dest=/usr/bin/node state=link
+
 - name: NPM | Install packages
   npm: name={{ item.package }} global={{ item.global }} state=present
   with_items: npm_packages
