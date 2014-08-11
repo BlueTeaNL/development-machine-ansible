@@ -3,3 +3,5 @@ npm_packages:
   - { package: less, global: yes }
   - { package: uglifycss, global: yes }
   - { package: uglify-js, global: yes }
+  - { package: coffee-script, global: yes }
+  - { package: bower, global: yes }
