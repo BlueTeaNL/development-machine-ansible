@@ -1,7 +1,16 @@
 ---
+- name: APT Key | Add PHP5 Repository signing key
+  apt_key: id=E5267A6C keyserver=keyserver.ubuntu.com state=present
+
+- name: APT Repo | ADD PHP5 Repository
+  apt_repository: repo='ppa:ondrej/php5' state=present
+
 - name: APT | Update cache
   apt: update_cache=yes
 
 - name: APT | Install packages
-  apt: pkg={{ item }} state=present
+  apt: pkg={{ item }} state=latest
   with_items: packages
+
+- name: APT | Upgrade distribution packages
+  apt: upgrade=dist
