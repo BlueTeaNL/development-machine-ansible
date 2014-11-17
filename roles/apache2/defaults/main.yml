@@ -8,6 +8,7 @@ apache2_packages:
   - php5-intl
   - php5-xmlrpc
   - php-apc
+  - php5-curl
 
 apache2_modules:
   - rewrite
