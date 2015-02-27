@@ -1,10 +1,10 @@
 ---
 apache2_vhosts:
   - { port: 80,
-      servername: hotflo2.local,
-      documentroot: /var/www/hotflo20/web,
-      serveradmin: p.widdershoven@bluetea.nl }
-  - { port: 80,
-      servername: example2.local,
+      servername: example.local,
       documentroot: /var/www/html,
-      serveradmin: p.widdershoven@bluetea.nl }
+      serveradmin: support@bluetea.nl }
+  - { port: 80,
+      servername: symfony2-application.local,
+      documentroot: /var/www/symfony2-application/web,
+      serveradmin: support@bluetea.nl }
