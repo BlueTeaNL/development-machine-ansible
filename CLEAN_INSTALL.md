@@ -43,7 +43,13 @@ cd ansible
 sudo cp hosts /etc/ansible/
 ```
 
-7. Run Ansible!
+7. Copy the virtual host configuration for Apache
+
+```
+sudo cp vars/apache2.yml.dist vars/apache2.yml
+```
+
+8. Run Ansible!
 
 ```
 sudo ansible-playbook bluetea-dev-env.yml
